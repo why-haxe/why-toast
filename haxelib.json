@@ -1,0 +1,14 @@
+{
+  "name": "why-toast",
+  "license": "MIT",
+  "tags": [
+    "toast"
+  ],
+  "classPath": "src",
+  "contributors": [
+    "kevinresol"
+  ],
+  "releasenote": "initial release",
+  "version": "0.0.0",
+  "dependencies": {}
+}
