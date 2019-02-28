@@ -1,7 +1,7 @@
 package why.toast;
 
-#if (!hxjs_noty || !noty_global)
-	#error 'NotyToast requires `-lib hxjs-noty` and `-D noty_global`'
+#if (!hxjs_noty)
+	#error 'NotyToast requires `-lib hxjs-noty`'
 #end
 
 import why.Toast;
