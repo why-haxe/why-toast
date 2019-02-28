@@ -32,7 +32,7 @@ abstract Toast(ToastObject) from ToastObject {
 	
 	public function error(e:Error, timeout = 5000) {
 		this.show({
-			title: e.message,
+			title: e.message + (e.data == null ? '' : ' ' + Std.string(e.data)),
 			type: Error,
 			timeout: timeout,
 		});
