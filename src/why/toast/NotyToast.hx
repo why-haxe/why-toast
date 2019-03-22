@@ -21,15 +21,16 @@ class NotyToast implements ToastObject {
 	}
 	
 	public function show(options:ToastOptions) {
-		new Noty(merge(defaults, {
-			text: options.title + (options.details == null ? '' : '<br>${options.details}'),
-			timeout: options.timeout,
-			type: switch options.type {
-				case Success: Success;
-				case Warning: Warning;
-				case Info: Info;
-				case Error: Error;
-			},
-		})).show();
+		var opt:Options = js.Object.assign({}, defaults);
+		opt.text = options.title + (options.details == null ? '' : '<br>${options.details}');
+		opt.timeout = options.timeout;
+		opt.type = switch options.type {
+			case Success: Success;
+			case Warning: Warning;
+			case Info: Info;
+			case Error: Error;
+		}
+		
+		new Noty(opt).show();
 	}
 }
