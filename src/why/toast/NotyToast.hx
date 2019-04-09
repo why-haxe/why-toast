@@ -5,7 +5,6 @@ package why.toast;
 #end
 
 import why.Toast;
-import tink.Anon.merge;
 import noty.Noty;
 
 /**
@@ -23,7 +22,13 @@ class NotyToast implements ToastObject {
 	public function show(options:ToastOptions) {
 		var opt:Options = js.Object.assign({}, defaults);
 		opt.text = options.title + (options.details == null ? '' : '<br>${options.details}');
-		opt.timeout = options.timeout;
+		opt.timeout = switch options.duration {
+			case null: 1500;
+			case Short: 1500;
+			case Long: 3500;
+			case Indefinite: null;
+			case Custom(ms): ms;
+		}
 		opt.type = switch options.type {
 			case Success: Success;
 			case Warning: Warning;
