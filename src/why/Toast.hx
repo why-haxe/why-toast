@@ -23,6 +23,14 @@ abstract Toast(ToastObject) from ToastObject {
 		});
 	}
 	
+	public function warning(message:String, duration = Long) {
+		this.show({
+			title: message,
+			type: Warning,
+			duration: duration,
+		});
+	}
+	
 	public function outcome<T>(outcome:Outcome<T, Error>, successMessage:String, duration = Long, ?opt:{?includeDetails:Bool}) {
 		switch outcome {
 			case Success(_): success(successMessage, duration);
