@@ -4,20 +4,20 @@ import why.Toast;
 
 class FomanticToast implements ToastObject {
 	
-	public function new() {}
+	var defaultOptions:Options;
+	
+	public function new(?opt) {
+		defaultOptions = opt == null ? {} : opt;
+		if(opt.getClassName != null) getClassName = opt.getClassName;
+	}
 	
 	public function show(options:ToastOptions) {
-		js.Syntax.code('$("body")').toast({
+		var ctx:{toast:{}->Void} = js.Syntax.code('$("body")');
+		ctx.toast({
 			title: options.title,
 			message: options.details,
-			'class':
-				switch options.type {
-					case null: null;
-					case Success: 'success';
-					case Error: 'error';
-					case Warning: 'warning';
-					case Info: null;
-				},
+			position: defaultOptions.position,
+			'class': getClassName(options.type == null ? Info : options.type),
 			displayTime:
 				switch options.duration {
 					case null: 5000;
@@ -28,4 +28,17 @@ class FomanticToast implements ToastObject {
 				}
 		});
 	}
+	dynamic function getClassName(type:ToastType) {
+		return switch type {
+			case Success: 'success';
+			case Error: 'error';
+			case Warning: 'warning';
+			case Info: 'info';
+		}
+	}
+}
+
+private typedef Options = {
+	?position:String,
+	?getClassName:ToastType->String,
 }
